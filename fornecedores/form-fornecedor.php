@@ -37,7 +37,7 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
             <div class="tela-principal">
                 <div class="menu-superior">
                     <div class="icone-menu-superior">
-                        <img src="../assets/images/icones/icon-usuario.png" alt="">
+                        <img src="../assets/images/icones/icon-fornecedor.png" alt="">
                     </div>
                     <div class="title">
                         <h2>Cadastrar Fornecedor</h2>

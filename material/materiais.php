@@ -44,7 +44,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
         <div class="tela-principal">
             <div class="menu-superior">
                 <div class="icone-menu-superior">
-                    <img src="../assets/images/icones/icon-fornecedor.png" alt="">
+                    <img src="../assets/images/icones/icon-material.png" alt="">
                 </div>
                 <div class="title">
                     <h2>Materiais</h2>
@@ -169,7 +169,15 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                             <label for="tipo" required class="col-form-label">Tipo de Material</label>
                             <select name="tipo" id="tipo" class="form-control">
                                 <option value=""></option>
-                                <option value="ok">ok</option>
+                                <option value=""></option>
+                                <option value="Bobina Forração">Bobina Forração</option>
+                                <option value="Cantoneira">Cantoneira</option>
+                                <option value="Wobble">Wobble</option>
+                                <option value="Clip Strips">Clip Strips</option>
+                                <option value="Precificador">Precificador</option>
+                                <option value="Expositor">Expositor</option>
+                                <option value="Régua">Régua</option>
+                                <option value="Cartaz">Cartaz</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
@@ -225,7 +233,14 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                             <label for="tipo" required class="col-form-label">Tipo de Material</label>
                             <select name="tipo" id="tipo" class="form-control">
                                 <option value=""></option>
-                                <option value="ok">ok</option>
+                                <option value="Bobina Forração">Bobina Forração</option>
+                                <option value="Cantoneira">Cantoneira</option>
+                                <option value="Wobble">Wobble</option>
+                                <option value="Clip Strips">Clip Strips</option>
+                                <option value="Precificador">Precificador</option>
+                                <option value="Expositor">Expositor</option>
+                                <option value="Régua">Régua</option>
+                                <option value="Cartaz">Cartaz</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
