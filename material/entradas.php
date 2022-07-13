@@ -70,6 +70,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                                 <th scope="col" class="text-center text-nowrap">Material</th>
                                 <th scope="col" class="text-center text-nowrap">Fornecedor</th>
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
+                                <th scope="col" class="text-center text-nowrap">Rua</th>
+                                <th scope="col" class="text-center text-nowrap">Prédio</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
                                 <th scope="col" class="text-center text-nowrap"> Ações </th> 
                             </tr>
@@ -102,6 +104,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     { data: 'material'},
                     { data: 'fornecedor'},
                     {data: 'qtd'},
+                    {data: 'rua'},
+                    {data: 'predio'},
                     { data: 'usuario'},
                     { data: 'acoes'},
                 ],
@@ -127,12 +131,14 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                 success: function(data){
                     var json = JSON.parse(data);
                     $('#id').val(json.identradas);
-                    $('#materialEdit').val(json.descricao);
+                    $('#materialEdit').val(json.material);
                     $('#qtd').val(json.qtd);
                     $('#recebimento').val(json.data_recebimento);
                     $('#usuario').val(json.usuario);
                     var industria = json.industria + " - " + json.fantasia;
                     $('#fornecedorEdit').val(industria);
+                    $('#rua').val(json.rua);
+                    $('#predio').val(json.predio);
                 }
             })
         });
@@ -154,7 +160,16 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="materialEdit" class="col-form-label">Material</label>
-                            <input type="text" name="materialEdit" id="materialEdit" readonly class="form-control">
+                            <select readonly="" style="pointer-events: none; touch-action: none;" name="material" required id="materialEdit" class="form-control">
+                                <option value=""></option>
+                                <?php 
+                                $sql = $db->query("SELECT * FROM material");
+                                $materiais = $sql->fetchAll();
+                                foreach($materiais as $material):
+                                ?>
+                                <option value="<?=$material['idmaterial']?>"><?=$material['descricao']?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="fornecedorEdit" class="col-form-label">Fornecedor</label>
@@ -169,6 +184,16 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                             <input type="number" name="qtd" id="qtd" class="form-control">
                         </div>
                     </div>   
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="rua" required class="col-form-label">Rua</label>
+                            <input type="text" name="rua" id="rua" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="predio" required class="col-form-label">Prédio</label>
+                            <input type="text" name="predio" id="predio" class="form-control">
+                        </div>
+                    </div> 
             </div>
             <div class="modal-footer">
                     <div class="text-center">
@@ -218,7 +243,17 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                             <label for="qtd" required class="col-form-label">Qtd</label>
                             <input type="number" name="qtd" id="qtd" class="form-control">
                         </div>
-                    </div>   
+                    </div>  
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="rua" required class="col-form-label">Rua</label>
+                            <input type="text" name="rua" id="rua" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="predio" required class="col-form-label">Prédio</label>
+                            <input type="text" name="predio" id="predio" class="form-control">
+                        </div>
+                    </div> 
             </div>
             <div class="modal-footer">
                     <div class="text-center">

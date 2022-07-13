@@ -12,13 +12,17 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
     $fornecedor = trim($fornecedor[0]);
     $recebimento = filter_input(INPUT_POST, 'recebimento');
     $qtd = filter_input(INPUT_POST, 'qtd');
+    $rua = filter_input(INPUT_POST, 'rua');
+    $predio = filter_input(INPUT_POST, 'predio');
 
     
-    $sql = $db->prepare("INSERT INTO entradas (data_recebimento, material, industria,  qtd, usuario) VALUES (:recebimento, :material, :industria, :qtd, :usuario)");
+    $sql = $db->prepare("INSERT INTO entradas (data_recebimento, material, industria,  qtd, rua, predio, usuario) VALUES (:recebimento, :material, :industria, :qtd, :rua, :predio, :usuario)");
     $sql->bindValue(':recebimento', $recebimento);
     $sql->bindValue(':material', $material);
     $sql->bindValue(':industria', $fornecedor);
     $sql->bindValue(':qtd', $qtd);
+    $sql->bindValue(':rua', $rua);
+    $sql->bindValue(':predio', $predio);
     $sql->bindValue(':usuario', $usuario);
     
     if($sql->execute()){
