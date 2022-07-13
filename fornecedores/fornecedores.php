@@ -120,7 +120,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Fornecedor</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="atualiza-forn.php" method="post" >
@@ -145,7 +145,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Atualizar</button>
                     </div>
-                    <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </form> 
             </div>
         </div>

@@ -34,9 +34,6 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
     <!-- select02 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
-
-</head>
 <body>
     <div class="container-fluid corpo">
         <?php require('../menu-lateral.php') ?>
@@ -62,13 +59,14 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     <a href="entradas-xls.php" ><img src="../assets/images/excel.jpg" alt=""></a>    
                 </div>
                 <div class="table-responsive">
-                    <table id='tableEnt' class='table table-striped table-bordered nowrap text-center' style="width: 100%;">
+                    <table id='entradas' class='table table-striped table-bordered nowrap text-center' style="width: 100%;">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center text-nowrap" > Código </th>
                                 <th scope="col" class="text-center text-nowrap" > Data de Recebimento </th>
-                                <th scope="col" class="text-center text-nowrap">Material</th>
-                                <th scope="col" class="text-center text-nowrap">Fornecedor</th>
+                                <th scope="col" class="text-center text-nowrap">Brinde</th>
+                                <th scope="col" class="text-center text-nowrap">Tipo</th>
+                                <th scope="col" class="text-center text-nowrap">Marca</th>
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
                                 <th scope="col" class="text-center text-nowrap"> Ações </th> 
@@ -89,7 +87,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
     
     <script>
         $(document).ready(function(){
-            $('#tableEnt').DataTable({
+            $('#entradas').DataTable({
                 'processing': true,
                 'serverSide': true,
                 'serverMethod': 'post',
@@ -97,10 +95,11 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     'url':'pesq_ent.php'
                 },
                 'columns': [
-                    {data: 'identradas'},
+                    {data: 'idbrindes'},
                     { data: 'data_recebimento'},
-                    { data: 'material'},
-                    { data: 'fornecedor'},
+                    { data: 'brinde'},
+                    { data: 'tipo'},
+                    { data: 'marca'},
                     {data: 'qtd'},
                     { data: 'usuario'},
                     { data: 'acoes'},
@@ -113,8 +112,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
         });
 
         //abrir modal
-        $('#tableEnt').on('click', '.editbtn', function(event){
-            var table = $('#tableEnt').DataTable();
+        $('#entradas').on('click', '.editbtn', function(event){
+            var table = $('#entradas').DataTable();
             var trid = $(this).closest('tr').attr('id');
             var id = $(this).data('id');
 
@@ -126,13 +125,11 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                 type:'post',
                 success: function(data){
                     var json = JSON.parse(data);
-                    $('#id').val(json.identradas);
-                    $('#materialEdit').val(json.descricao);
+                    $('#id').val(json.idbrindes_entrada);
+                    $('#brinde').val(json.brinde);
                     $('#qtd').val(json.qtd);
                     $('#recebimento').val(json.data_recebimento);
-                    $('#usuario').val(json.usuario);
-                    var industria = json.industria + " - " + json.fantasia;
-                    $('#fornecedorEdit').val(industria);
+                    $('#marca').val(json.marca);
                 }
             })
         });
@@ -153,12 +150,20 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     <input type="hidden" name="trid" id="trid" value="">
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="materialEdit" class="col-form-label">Material</label>
-                            <input type="text" name="materialEdit" id="materialEdit" readonly class="form-control">
+                            <label for="brinde" class="col-form-label">Brinde</label>
+                            <select style="pointer-events: none; touch-action: none;" name="brinde" readonly required id="brinde" class="form-control">
+                                <?php 
+                                $sql = $db->query("SELECT * FROM brindes");
+                                $materiais = $sql->fetchAll();
+                                foreach($materiais as $material):
+                                ?>
+                                <option value="<?=$material['idbrindes']?>"><?=$material['descricao']?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="fornecedorEdit" class="col-form-label">Fornecedor</label>
-                            <input type="text" readonly name="fornecedorEdit" id="fornecedorEdit" class="form-control">
+                            <label for="marca" class="col-form-label">Marca</label>
+                            <input type="text" readonly name="marca" required class="form-control" id="marca">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="recebimento" class="col-form-label">Data de Recebimento</label>
@@ -194,21 +199,21 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                 <form action="add-entrada.php" method="post" >
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="material" class="col-form-label">Material</label>
-                            <select name="material" required id="material" class="form-control">
+                            <label for="material" class="col-form-label">Brinde</label>
+                            <select name="brinde" required id="brinde" class="form-control">
                                 <option value=""></option>
                                 <?php 
-                                $sql = $db->query("SELECT * FROM material");
+                                $sql = $db->query("SELECT * FROM brindes");
                                 $materiais = $sql->fetchAll();
                                 foreach($materiais as $material):
                                 ?>
-                                <option value="<?=$material['idmaterial']?>"><?=$material['descricao']?></option>
+                                <option value="<?=$material['idbrindes']?>"><?=$material['descricao']?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="fornecedor" class="col-form-label">Fornecedor</label>
-                            <input type="text" readonly name="fornecedor" required class="form-control" id="fornecedor">
+                            <label for="marca" class="col-form-label">Marca</label>
+                            <input type="text" readonly name="marca" required class="form-control" id="marca">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="recebimento" class="col-form-label">Data de Recebimento</label>
@@ -240,13 +245,13 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
         });
 
         //preencher fornecedor
-        $("select[name='material']").change(function(){
-            var $fornecedor = $("input[name='fornecedor']");
-            var codMaterial = $(this).val();
+        $("select[name='brinde']").change(function(){
+            var $marca = $("input[name='marca']");
+            var codBrinde = $(this).val();
 
-            $.getJSON('consultaForn.php', {codMaterial},
+            $.getJSON('consultaMa.php', {codBrinde},
                 function(retorno){
-                    $fornecedor.val(retorno.fornecedor);
+                    $marca.val(retorno.marca);
                 }
             );
         });

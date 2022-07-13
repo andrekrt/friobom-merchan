@@ -21,6 +21,18 @@
             </nav>
         </div>
         <div class="item">
+            <a class="" onclick="menuBrinde()">
+                <img src="../assets/images/menu/menu-brinde.png" alt="">
+            </a>
+            <nav id="submenuBrinde">
+                <ul class="nav flex-column">
+                    <li class="nav-item"> <a class="nav-link" href="../brindes/brindes.php"> Brindes </a> </li>  
+                    <li class="nav-item"> <a class="nav-link" href="../brindes/entradas.php">Entradas </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="../brindes/saidas.php">Saídas </a> </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="item">
             <a onclick="menuFornecedor()">
                 <img src="../assets/images/menu/menu-fornecedor.png" >
             </a>
