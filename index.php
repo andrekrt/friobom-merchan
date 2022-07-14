@@ -8,18 +8,31 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
     $idUsuario = $_SESSION['idusuario'];
     $nomeUsuario = $_SESSION['nome'];
 
-    //total de entradas
+    //total de entradas de materiais
     $entradas = $db->query("SELECT SUM(qtd) as total FROM entradas");
     $entradas = $entradas->fetch();
     $totalEntradas = $entradas['total'];
 
-    //total de saidas
+    //total de saidas materiais
     $saidas = $db->query("SELECT SUM(qtd) as total FROM saidas");
     $saidas = $saidas->fetch();
     $totalSaidas = $saidas['total'];
 
-    //estoque atual
+    //estoque atual materiais
     $estoque = $totalEntradas-$totalSaidas;
+
+    //total de entradas de brindes
+    $entradasBrindes = $db->query("SELECT SUM(qtd) as total FROM brindes_entrada");
+    $entradasBrindes = $entradasBrindes->fetch();
+    $totalEntradasBrindes = $entradasBrindes['total'];
+
+    //total de saidas de brindes
+    $saidasBrindes = $db->query("SELECT SUM(qtd) as total FROM brindes_saida");
+    $saidasBrindes = $saidasBrindes->fetch();
+    $totalSaidasBrindes = $saidasBrindes['total'];
+
+    //estoque atual materiais
+    $estoqueBrindes = $totalEntradasBrindes-$totalSaidasBrindes;
 
 }else{
     header("Location:login.php");
@@ -125,29 +138,56 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
                     <div class="area-indice-val">
                         <div class="indice-ind">
                             <div class="indice-ind-tittle">
-                                <p>Total de Entradas</p>
+                                <p>Entradas de Materiais</p>
                             </div>
                             <div class="indice-qtde">
-                                <img src="assets/images/icones/entradas.png" alt="">
+                                <img src="assets/images/icones/entrada-material.png" alt="">
                                 <p class="qtde">  <?= $totalEntradas ?> </p>
                             </div>
                         </div>
                         <div class="indice-ind">
                             <div class="indice-ind-tittle">
-                                <p>Total de Saídas</p>
+                                <p>Saídas de Materiais</p>
                             </div>
                             <div class="indice-qtde">
-                                <img src="assets/images/icones/saidas.png" alt="">
+                                <img src="assets/images/icones/saida-material.png" alt="">
                                 <p class="qtde"> <?= $totalSaidas ?> </p>
                             </div>
                         </div>
                         <div class="indice-ind">
                             <div class="indice-ind-tittle">
-                                <p>Estoque Atual</p>
+                                <p>Estoque de Materiais</p>
                             </div>
                             <div class="indice-qtde">
-                                <img src="assets/images/icones/estoque.png" alt="">
+                                <img src="assets/images/icones/estoque-material.png" alt="">
                                 <p class="qtde"> <?=$estoque?> </p>
+                            </div>
+                        </div>
+                        <div class="indice-ind">
+                            <div class="indice-ind-tittle">
+                                <p>Entradas de Brindes</p>
+                            </div>
+                            <div class="indice-qtde">
+                                <img src="assets/images/icones/entrada-brinde.png" alt="">
+                                <p class="qtde">  <?= $totalEntradasBrindes ?> </p>
+                            </div>
+                        </div>
+                        <div class="indice-ind">
+                            <div class="indice-ind-tittle">
+                                <p>Saídas de Brindes</p>
+                            </div>
+                            <div class="indice-qtde">
+                                <img src="assets/images/icones/saida-brinde.png" alt="">
+                                <p class="qtde"> <?= $totalSaidasBrindes ?> </p>
+                            </div>
+                        </div>
+                        <div class="indice-ind">
+                            <div class="indice-ind-tittle">
+                                <p>Estoque de Brindes</p>
+                            </div>
+                            <div class="indice-qtde">
+                                <img src="assets/images/icones/estoque-brinde.png" alt="">
+                                <p class="qtde"> <?=$estoqueBrindes?> </p>
                             </div>
                         </div>
                     </div>

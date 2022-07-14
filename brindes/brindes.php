@@ -39,7 +39,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
         <div class="tela-principal">
             <div class="menu-superior">
                 <div class="icone-menu-superior">
-                    <img src="../assets/images/icones/icon-material.png" alt="">
+                    <img src="../assets/images/icones/Icon-brinde.png" alt="">
                 </div>
                 <div class="title">
                     <h2>Brindes</h2>
