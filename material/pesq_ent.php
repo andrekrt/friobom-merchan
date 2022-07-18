@@ -59,6 +59,8 @@ foreach($empRecords as $row){
             "qtd"=>$row['qtd'],
             "rua"=>$row['rua'],
             "predio"=>$row['predio'],
+            "nivel"=>$row['nivel'],
+            "apartamento"=>$row['apartamento'],
             "usuario"=>$row['nome'],
             "acoes"=> '<a href="javascript:void();" data-id="'.$row['identradas'].'"  class="btn btn-info btn-sm editbtn" >Visulizar</a>  <a href="excluir-entrada.php?id='.$row['identradas'].' " data-id="'.$row['identradas'].'"  class="btn btn-danger btn-sm deleteBtn" >Excluir</a>'
         );

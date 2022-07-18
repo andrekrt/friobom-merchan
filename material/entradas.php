@@ -72,6 +72,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
                                 <th scope="col" class="text-center text-nowrap">Rua</th>
                                 <th scope="col" class="text-center text-nowrap">Prédio</th>
+                                <th scope="col" class="text-center text-nowrap">Nível</th>
+                                <th scope="col" class="text-center text-nowrap">Apartamento</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
                                 <th scope="col" class="text-center text-nowrap"> Ações </th> 
                             </tr>
@@ -106,6 +108,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     {data: 'qtd'},
                     {data: 'rua'},
                     {data: 'predio'},
+                    {data: 'nivel'},
+                    {data: 'apartamento'},
                     { data: 'usuario'},
                     { data: 'acoes'},
                 ],
@@ -139,6 +143,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     $('#fornecedorEdit').val(industria);
                     $('#rua').val(json.rua);
                     $('#predio').val(json.predio);
+                    $('#nivel').val(json.nivel);
+                    $('#apartamento').val(json.apartamento);
                 }
             })
         });
@@ -192,6 +198,14 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                         <div class="form-group col-md-2">
                             <label for="predio" required class="col-form-label">Prédio</label>
                             <input type="text" name="predio" id="predio" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="nivel" required class="col-form-label">Nível</label>
+                            <input type="text" name="nivel" id="nivel" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="apartamento" required class="col-form-label">Apartamento</label>
+                            <input type="text" name="apartamento" id="apartamento" class="form-control">
                         </div>
                     </div> 
             </div>
@@ -252,6 +266,14 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                         <div class="form-group col-md-2">
                             <label for="predio" required class="col-form-label">Prédio</label>
                             <input type="text" name="predio" id="predio" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="nivel" required class="col-form-label">Nível</label>
+                            <input type="text" name="nivel" id="nivel" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="apartamento" required class="col-form-label">Apartamento</label>
+                            <input type="text" name="apartamento" id="apartamento" class="form-control">
                         </div>
                     </div> 
             </div>
