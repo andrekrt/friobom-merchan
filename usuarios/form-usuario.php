@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
+if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_SESSION['tipoUsuario'] == 1 || $_SESSION['tipoUsuario'] == 99)){
 
     
 }else{
@@ -64,9 +64,18 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
                                     <input type="email" required name="email" id="email" class="form-control">
                                 </div>
                                 <div class="form-group col-md-3 espaco ">
+                                    <label for="tipo">Tipo de Usuário</label>
+                                    <select name="tipo" id="tipo" class="form-control">
+                                        <option value=""></option>
+                                        <option value="1">Merchandising</option>
+                                        <option value="2">Apoio</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 espaco ">
                                     <label for="senha">Senha</label>
                                     <input type="password" required name="senha" id="senha" class="form-control">
                                 </div>
+                                
                             </div>
                             
                         </div>

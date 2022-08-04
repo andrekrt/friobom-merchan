@@ -17,6 +17,7 @@
                     <li class="nav-item"> <a class="nav-link" href="../material/materiais.php"> Materiais </a> </li>  
                     <li class="nav-item"> <a class="nav-link" href="../material/entradas.php">Entradas </a> </li>
                     <li class="nav-item"> <a class="nav-link" href="../material/saidas.php">Saídas </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="../material/solicitacao-saida.php">Solicitaçõs de Saída </a> </li>
                 </ul>
             </nav>
         </div>

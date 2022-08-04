@@ -61,8 +61,8 @@ foreach($empRecords as $row){
             "qtd"=>$row['qtd'],
             "cliente"=>$row['cliente'],
             "rota"=>$row['rota'],
-            "usuario"=>$row['nome'],
-            "acoes"=> '<a href="javascript:void();" data-id="'.$row['idsaidas'].'"  class="btn btn-info btn-sm editbtn" >Visulizar</a>  <a href="excluir-saida.php?id='.$row['idsaidas'].' " data-id="'.$row['idsaidas'].'"  class="btn btn-danger btn-sm deleteBtn" >Excluir</a>'
+            "usuario"=>$row['nome']
+            // "acoes"=> '<a href="javascript:void();" data-id="'.$row['idsaidas'].'"  class="btn btn-info btn-sm editbtn" >Visulizar</a>  <a href="excluir-saida.php?id='.$row['idsaidas'].' " data-id="'.$row['idsaidas'].'"  class="btn btn-danger btn-sm deleteBtn" >Excluir</a>'
         );
 }
 

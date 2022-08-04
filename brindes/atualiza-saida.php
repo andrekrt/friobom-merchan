@@ -4,7 +4,7 @@ session_start();
 require("../conexao.php");
 require("funcao.php");
 
-if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
+if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_SESSION['tipoUsuario'] == 1 || $_SESSION['tipoUsuario'] == 99)){
 
     $idSaida = filter_input(INPUT_POST, 'id');
     $brinde = filter_input(INPUT_POST, 'brinde');

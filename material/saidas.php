@@ -3,7 +3,7 @@
 session_start();
 require("../conexao.php");
 
-if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
+if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_SESSION['tipoUsuario'] == 1 || $_SESSION['tipoUsuario'] == 99)) {
     
 } else {
     echo "<script>alert('Acesso não permitido');</script>";
@@ -56,9 +56,9 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
             <!-- dados exclusivo da página-->
             <div class="menu-principal">
                 <div class="icon-exp">
-                    <div class="area-opcoes-button">
+                    <!-- <div class="area-opcoes-button">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalSaida" data-whatever="@mdo" name="idpeca">Nova Saída</button>
-                    </div>
+                    </div> -->
                     <a href="saidas-xls.php" ><img src="../assets/images/excel.jpg" alt=""></a>    
                 </div>
                 <div class="table-responsive">
@@ -73,7 +73,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                                 <th scope="col" class="text-center text-nowrap">Cliente</th>
                                 <th scope="col" class="text-center text-nowrap">Rota</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
-                                <th scope="col" class="text-center text-nowrap"> Ações </th> 
+                                <!-- <th scope="col" class="text-center text-nowrap"> Ações </th>  -->
                             </tr>
                         </thead>
                     </table>
@@ -107,7 +107,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                     { data: 'cliente'},
                     {data: 'rota'},
                     { data: 'usuario'},
-                    { data: 'acoes'},
+                    // { data: 'acoes'},
                 ],
                 "language":{
                     "url":"//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
