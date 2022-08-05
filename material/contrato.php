@@ -10,7 +10,7 @@ $tipousuario = $_SESSION['tipoUsuario'];
 
     $idSolicitacao = filter_input(INPUT_GET, 'id');
     $dataAtual = date('d/m/Y');
-    $dataExtenso=utf8_encode(strftime('%d de %B de %Y', strtotime($dataAtual))) ;
+    $dataExtenso=utf8_encode(strftime('%d de %B de %Y', strtotime(date('Y-m-d')))) ;
 
     //consulta mysql
     $sql = $db->prepare("SELECT * FROM solicitacao_saida_material LEFT JOIN material ON solicitacao_saida_material.material = material.idmaterial LEFT JOIN industrias ON material.industria = industrias.idindustrias WHERE idsolicitacao = :id");

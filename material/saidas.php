@@ -56,9 +56,9 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
             <!-- dados exclusivo da página-->
             <div class="menu-principal">
                 <div class="icon-exp">
-                    <!-- <div class="area-opcoes-button">
+                    <div class="area-opcoes-button">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalSaida" data-whatever="@mdo" name="idpeca">Nova Saída</button>
-                    </div> -->
+                    </div>
                     <a href="saidas-xls.php" ><img src="../assets/images/excel.jpg" alt=""></a>    
                 </div>
                 <div class="table-responsive">
@@ -214,7 +214,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                             <select name="material" required id="material" class="form-control">
                                 <option value=""></option>
                                 <?php 
-                                $sql = $db->query("SELECT * FROM material");
+                                $sql = $db->query("SELECT * FROM material WHERE tipo <> 'Expositor'");
                                 $materiais = $sql->fetchAll();
                                 foreach($materiais as $material):
                                 ?>

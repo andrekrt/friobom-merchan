@@ -234,7 +234,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false) {
                             <select name="material" required id="material" class="form-control">
                                 <option value=""></option>
                                 <?php 
-                                $sql = $db->query("SELECT * FROM material");
+                                $sql = $db->query("SELECT * FROM material WHERE tipo = 'Expositor'");
                                 $materiais = $sql->fetchAll();
                                 foreach($materiais as $material):
                                 ?>

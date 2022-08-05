@@ -129,7 +129,7 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
                         <img src="assets/images/icones/home.png" alt="">
                    </div>
                    <div class="title">
-                        <h2>Bem-Vindo <?php echo $nomeUsuario ?></h2>
+                        <h2>Bem-Vindo <?= utf8_decode($nomeUsuario) ?></h2>
                    </div>
                    <div class="menu-mobile">
                         <img src="assets/images/icones/menu-mobile.png" onclick="abrirMenuMobile()" alt="">
