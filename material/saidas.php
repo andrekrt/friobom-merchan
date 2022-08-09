@@ -207,7 +207,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="add-saida.php" method="post" >
+                <form action="add-saida-material.php" method="post" >
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="material" class="col-form-label">Material</label>
