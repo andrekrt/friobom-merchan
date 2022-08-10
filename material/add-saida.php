@@ -9,6 +9,7 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     $idSolicitacao = filter_input(INPUT_GET, 'id');
     $dataSaida = date("Y-m-d");
     $usuario = $_SESSION['idusuario'];
+    $dataAprovacao = date("Y-m-d H:i:s");
     
     $consulta = $db->prepare("SELECT * FROM solicitacao_saida_material LEFT JOIN material ON solicitacao_saida_material.material = material.idmaterial LEFT JOIN industrias ON material.industria = industrias.idindustrias LEFT JOIN usuarios ON solicitacao_saida_material.solicitante = usuarios.idusuarios  WHERE idsolicitacao = :id");
     $consulta->bindValue(':id', $idSolicitacao);
@@ -28,7 +29,8 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     
     if($sql->execute()){
         contaEstoque($dadosSolic['material']);
-        $atualiza = $db->prepare("UPDATE solicitacao_saida_material SET status_solic = :situacao WHERE idsolicitacao = :id");
+        $atualiza = $db->prepare("UPDATE solicitacao_saida_material SET status_solic = :situacao, data_resposta = :dataRespota WHERE idsolicitacao = :id");
+        $atualiza->bindValue(':dataRespota', $dataAprovacao);
         $atualiza->bindValue(':situacao', 'Aprovado');
         $atualiza->bindValue(':id', $idSolicitacao);
         if($atualiza->execute()){

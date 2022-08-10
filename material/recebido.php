@@ -11,10 +11,12 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     $situacao = "Recebido";
     $contrato = $_FILES['contrato'];
     $tipoArquivo = pathinfo($_FILES['contrato']['name'], PATHINFO_EXTENSION);
+    $dataRecebido = date("Y-m-d H:i:s");
 
     //echo "$usuario<br>$material<br>$fornecedor<br>$qtd<br>$pedido<br>$idSolicitacao";
 
-    $atualizar = $db->prepare("UPDATE solicitacao_saida_material SET status_solic = :situacao WHERE idsolicitacao = :id");
+    $atualizar = $db->prepare("UPDATE solicitacao_saida_material SET status_solic = :situacao, data_recebimento = :dataRecebimento WHERE idsolicitacao = :id");
+    $atualizar->bindValue(':dataRecebimento', $dataRecebido);
     $atualizar->bindValue(':situacao', $situacao);
     $atualizar->bindValue(':id', $idSolicitacao);
     if($atualizar->execute()){

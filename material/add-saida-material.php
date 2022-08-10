@@ -35,7 +35,6 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
         print_r($sql->errorInfo());
     }
 
-    
 }else{
     echo "<script> alert('Acesso não permitido')</script>";
     echo "<script> window.location.href='saidas.php' </script>";

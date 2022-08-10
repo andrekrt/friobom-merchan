@@ -15,6 +15,7 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     $fornecedor = trim($fornecedor[0]);
     $valorTotal = 0;
     $situacao = "Em Análise";
+    $data = date("Y-m-d H:i:s");
 
     //verificar se pedido existe
     $consultaPedido = $dbora->prepare("SELECT * FROM friobom.pcpedc where numped = :pedido ");
@@ -58,7 +59,8 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     if($sqlwint && $qtdWint ){
         $dadosCli = $sqlwint->fetch();
 
-        $inserir = $db->prepare("INSERT INTO solicitacao_saida_material (material, qtd, pedido, cliente, rota, num_itens, valor, status_solic, solicitante) VALUE(:material, :qtd, :pedido, :cliente, :rota, :itens, :valor, :situacao, :solicitante) ");
+        $inserir = $db->prepare("INSERT INTO solicitacao_saida_material (data_solicitacao, material, qtd, pedido, cliente, rota, num_itens, valor, status_solic, solicitante) VALUE(:dataSolic, :material, :qtd, :pedido, :cliente, :rota, :itens, :valor, :situacao, :solicitante) ");
+        $inserir->bindValue(':dataSolic', $data);
         $inserir->bindValue(':material', $material);
         $inserir->bindValue(':qtd', $qtd);
         $inserir->bindValue(':pedido', $pedido);
@@ -77,7 +79,6 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
         print_r($sqlwint->errorInfo()); 
         print_r($qtdWint->errorInfo());
     }
-    
     
 }else{
     echo "<script> alert('Acesso não permitido')</script>";

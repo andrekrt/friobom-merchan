@@ -9,7 +9,7 @@ $options = array(
 );
 
     try {
-        $db = new PDO($dsn, $dbuser, $dbpass);
+        $db = new PDO($dsn, $dbuser, $dbpass, $options);
     } catch (PDOException $e) {
         echo "Falhou: " . $e->getMessage();
     }

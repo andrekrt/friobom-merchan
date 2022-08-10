@@ -8,10 +8,12 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     $idSolicitacao = filter_input(INPUT_POST, 'recusa');
     $situacao = "Recusado";
     $motivo = filter_input(INPUT_POST, 'obs');
+    $dataRecusa = date("Y-m-d H:i:s");
 
     // echo "$idSolicitacao<br>$situacao<br>$motivo";
 
-    $atualizar = $db->prepare("UPDATE solicitacao_saida_material SET status_solic = :situacao, obs = :obs WHERE idsolicitacao = :id");
+    $atualizar = $db->prepare("UPDATE solicitacao_saida_material SET status_solic = :situacao, data_resposta = :dataResposta, obs = :obs WHERE idsolicitacao = :id");
+    $atualizar->bindValue(':dataResposta', $dataRecusa);
     $atualizar->bindValue(':situacao', $situacao);
     $atualizar->bindValue(':obs', $motivo);
     $atualizar->bindValue(':id', $idSolicitacao);

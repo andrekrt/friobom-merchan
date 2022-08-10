@@ -90,7 +90,7 @@ foreach($empRecords as $row){
         "rota"=>$row['rota'],
         "num_itens"=>$row['num_itens'],
         "valor"=>"R$ ". str_replace(".",",", $row['valor']) ,
-        "situacao"=>$row['status_solic'],
+        "situacao"=> $row['status_solic'],
         "obs"=>$row['obs'],
         "link"=>$link,
         "solicitante"=>$row['nome'],
