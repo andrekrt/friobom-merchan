@@ -72,6 +72,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
                                 <th scope="col" class="text-center text-nowrap">Cliente</th>
                                 <th scope="col" class="text-center text-nowrap">Rota</th>
+                                <th scope="col" class="text-center text-nowrap">Promotor</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
                                 <!-- <th scope="col" class="text-center text-nowrap"> Ações </th>  -->
                             </tr>
@@ -106,6 +107,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     {data: 'qtd'},
                     { data: 'cliente'},
                     {data: 'rota'},
+                    {data: 'promotor'},
                     { data: 'usuario'},
                     // { data: 'acoes'},
                 ],
@@ -184,6 +186,10 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                             <label for="rota" required class="col-form-label">Rota</label>
                             <input type="text" name="rota" id="rota" class="form-control">
                         </div>
+                        <div class="form-group col-md-4">
+                            <label for="promotor" required class="col-form-label">Promotor</label>
+                            <input type="text" name="promotor" id="promotor" class="form-control">
+                        </div>
                     </div>    
             </div>
             <div class="modal-footer">
@@ -243,6 +249,10 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                         <div class="form-group col-md-4">
                             <label for="rota" required class="col-form-label">Rota</label>
                             <input type="text" name="rota" id="rota" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="promotor" required class="col-form-label">Promotor</label>
+                            <input type="text" name="promotor" id="promotor" class="form-control">
                         </div>
                     </div>  
             </div>

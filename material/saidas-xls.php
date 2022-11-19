@@ -24,6 +24,7 @@ require("../conexao.php");
                 $html .= '<td class="text-center font-weight-bold"> Código  </td>';
                 $html .= '<td class="text-center font-weight-bold"> Data de Saída </td>';
                 $html .= '<td class="text-center font-weight-bold"> Material </td>';
+                $html .= '<td class="text-center font-weight-bold"> Código Indústria </td>';
                 $html .= '<td class="text-center font-weight-bold">Indústria</td>';
                 $html .= '<td class="text-center font-weight-bold"> Qtd </td>';
                 $html .= '<td class="text-center font-weight-bold"> Cliente </td>';
@@ -34,14 +35,15 @@ require("../conexao.php");
                 $sql = $db->query("SELECT * FROM saidas LEFT JOIN material ON saidas.material = material.idmaterial LEFT JOIN industrias ON saidas.industria = industrias.idindustrias LEFT JOIN usuarios ON saidas.usuario = usuarios.idusuarios");
                 $dados = $sql->fetchAll();
                 foreach($dados as $dado){
-
+                    
                     $html .= '<tr>';
                     $html .= '<td>'.$dado['idsaidas']. '</td>';
                     $html .= '<td>'. date("d/m/Y", strtotime($dado['data_saida']))  . '</td>';
                     $html .= '<td>'. $dado['descricao'] . '</td>';
+                    $html .= '<td>'. $dado['industria'] . '</td>';
                     $html .= '<td>'. $dado['fantasia'] .'</td>';
                     $html .= '<td>'. $dado['qtd']. '</td>';
-                    $html .= '<td>'. $dado['cliente']. '</td>';
+                    $html .= '<td>'.($dado['cliente']) . '</td>';
                     $html .= '<td>'. $dado['rota']. '</td>';
                     $html .= '<td>'.$dado['nome'] . '</td>';
                     $html .= '</tr>';

@@ -20,7 +20,7 @@ if($searchValue != ''){
         'descricao'=>"%$searchValue%",
         'marca'=>"%$searchValue%",
         'tipo'=>"%$searchValue%",
-        'clinete'=>"%$searchValue%",
+        'cliente'=>"%$searchValue%",
         'rca'=>"%$searchValue%",
         'obs'=>"%$searchValue%"
     );

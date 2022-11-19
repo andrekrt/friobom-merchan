@@ -169,6 +169,9 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <option value="Fogão">Fogão</option>
                                 <option value="Batedeira">Batedeira</option>
                                 <option value="Ventilador">Ventilador</option>
+                                <option value="Fone de Ouvidos">Fone de Ouvido</option>
+                                <option value="Relógio">Relógio</option>
+                                <option value="Caixa de Som">Caixa de Som</option>
                             </select>
                         </div>
                     </div>    
@@ -217,6 +220,9 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <option value="Fogão">Fogão</option>
                                 <option value="Batedeira">Batedeira</option>
                                 <option value="Ventilador">Ventilador</option>
+                                <option value="Fone de Ouvidos">Fone de Ouvido</option>
+                                <option value="Relógio">Relógio</option>
+                                <option value="Caixa de Som">Caixa de Som</option>
                             </select>
                         </div>
                     </div>  

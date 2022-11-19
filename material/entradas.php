@@ -70,6 +70,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <th scope="col" class="text-center text-nowrap">Material</th>
                                 <th scope="col" class="text-center text-nowrap">Fornecedor</th>
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
+                                <th scope="col" class="text-center text-nowrap">Valor Unit</th>
+                                <th scope="col" class="text-center text-nowrap">Valor Total</th>
                                 <th scope="col" class="text-center text-nowrap">Rua</th>
                                 <th scope="col" class="text-center text-nowrap">Prédio</th>
                                 <th scope="col" class="text-center text-nowrap">Nível</th>
@@ -87,6 +89,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
     <script src="../assets/js/jquery.js"></script>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/menu.js"></script>
+    <script src="../assets/js/jquery.mask.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/af-2.3.7/date-1.1.0/r-2.2.9/rg-1.1.3/sc-2.0.4/sp-1.3.0/datatables.min.js"></script>
@@ -106,6 +109,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     { data: 'material'},
                     { data: 'fornecedor'},
                     {data: 'qtd'},
+                    {data: 'valor_unit'},
+                    {data: 'valor_total'},
                     {data: 'rua'},
                     {data: 'predio'},
                     {data: 'nivel'},
@@ -164,7 +169,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     <input type="hidden" name="id" id="id" value="">
                     <input type="hidden" name="trid" id="trid" value="">
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="materialEdit" class="col-form-label">Material</label>
                             <select readonly="" style="pointer-events: none; touch-action: none;" name="material" required id="materialEdit" class="form-control">
                                 <option value=""></option>
@@ -177,7 +182,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="fornecedorEdit" class="col-form-label">Fornecedor</label>
                             <input type="text" readonly name="fornecedorEdit" id="fornecedorEdit" class="form-control">
                         </div>
@@ -188,6 +193,10 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                         <div class="form-group col-md-2">
                             <label for="qtd" required class="col-form-label">Qtd</label>
                             <input type="number" name="qtd" id="qtd" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="valorEdit" required class="col-form-label">Valor Unit. (R$)</label>
+                            <input type="text" name="valorEdit" id="valorEdit" class="form-control">
                         </div>
                     </div>   
                     <div class="form-row">
@@ -232,7 +241,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
             <div class="modal-body">
                 <form action="add-entrada.php" method="post" >
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="material" class="col-form-label">Material</label>
                             <select name="material" required id="material" class="form-control">
                                 <option value=""></option>
@@ -245,7 +254,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="fornecedor" class="col-form-label">Fornecedor</label>
                             <input type="text" readonly name="fornecedor" required class="form-control" id="fornecedor">
                         </div>
@@ -256,6 +265,10 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                         <div class="form-group col-md-2">
                             <label for="qtd" required class="col-form-label">Qtd</label>
                             <input type="number" name="qtd" id="qtd" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="valor" required class="col-form-label">Valor Unit. (R$)</label>
+                            <input type="text" name="valor" id="valor" class="form-control">
                         </div>
                     </div>  
                     <div class="form-row">
@@ -319,6 +332,10 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                 }
             );
         });
+
+        //mascara de dinheiro
+        $('#valor').mask("#.##0,00", {reverse: true});
+        $('#valorEdit').mask("#.##0,00", {reverse: true});
     });
 
     

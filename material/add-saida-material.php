@@ -14,16 +14,18 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
     $cliente = filter_input(INPUT_POST, 'cliente');
     $rota = filter_input(INPUT_POST, 'rota');
     $usuario = $_SESSION['idusuario'];
+    $promotor = filter_input(INPUT_POST, 'promotor');
 
     // echo "$usuario<br>$material<br>$fornecedor[0]<br>$dataSaida<br>$qtd<br>$cliente<br>$rota";
 
-    $sql = $db->prepare("INSERT INTO saidas (data_saida, material, industria,  qtd, cliente, rota, usuario) VALUES (:saida, :material, :industria, :qtd, :cliente, :rota, :usuario)");
+    $sql = $db->prepare("INSERT INTO saidas (data_saida, material, industria,  qtd, cliente, rota, promotor, usuario) VALUES (:saida, :material, :industria, :qtd, :cliente, :rota,:promotor, :usuario)");
     $sql->bindValue(':saida', $dataSaida);
     $sql->bindValue(':material', $material);
     $sql->bindValue(':industria', $fornecedor[0]);
     $sql->bindValue(':qtd', $qtd);
     $sql->bindValue(':cliente', $cliente);
     $sql->bindValue(':rota', $rota);
+    $sql->bindValue(':promotor', $promotor);
     $sql->bindValue(':usuario', $usuario);
     
     if($sql->execute()){

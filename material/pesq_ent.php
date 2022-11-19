@@ -57,6 +57,8 @@ foreach($empRecords as $row){
             "material"=>$row['descricao'],
             "fornecedor"=>$row['industria']." - " .$row['fantasia'],
             "qtd"=>$row['qtd'],
+            "valor_unit"=>"R$ ". number_format($row['valor_unit'],2,",",".") ,
+            "valor_total"=>"R$ ". number_format($row['valor_total'],2,",",".") ,
             "rua"=>$row['rua'],
             "predio"=>$row['predio'],
             "nivel"=>$row['nivel'],
