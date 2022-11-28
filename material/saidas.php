@@ -73,8 +73,10 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <th scope="col" class="text-center text-nowrap">Cliente</th>
                                 <th scope="col" class="text-center text-nowrap">Rota</th>
                                 <th scope="col" class="text-center text-nowrap">Promotor</th>
+                                <th scope="col" class="text-center text-nowrap">Situação</th>
+                                <th scope="col" class="text-center text-nowrap">Contrato de Recolhimento</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
-                                <!-- <th scope="col" class="text-center text-nowrap"> Ações </th>  -->
+                                <th scope="col" class="text-center text-nowrap"> Ações </th> 
                             </tr>
                         </thead>
                     </table>
@@ -108,14 +110,22 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     { data: 'cliente'},
                     {data: 'rota'},
                     {data: 'promotor'},
+                    {data: 'situacao'},
+                    { data: 'contrato'},
                     { data: 'usuario'},
-                    // { data: 'acoes'},
+                    { data: 'acoes'},
                 ],
                 "language":{
                     "url":"//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                 }
             });
             
+        });
+
+        $('#tableSai').on('click', '#recolher', function(event){
+            var id = $(this).data('id');
+            $('#modalRecebimento').modal('show');
+            $('#recebimento').val(id);
         });
 
         //abrir modal
@@ -147,62 +157,30 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
         
     </script>
 
-<!-- modal visualisar e editar -->
-<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Saída</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+<!-- Modal Confirmar recebimento -->
+<div class="modal fade" id="modalRecebimento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar Recolhimento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="recolhido.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="recebimento" class="form-control" id="recebimento">
+            <div class="mb-3 form-grupo col-md-12 ">
+                <label for="contrato" class="form-label">Contrato Assinado</label>
+                <input type="file" required name="contrato" class="form-control" id="contrato">    
             </div>
-            <div class="modal-body">
-                <form action="atualiza-saida.php" method="post" >
-                    <input type="hidden" name="id" id="id" value="">
-                    <input type="hidden" name="trid" id="trid" value="">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="materialEdit" class="col-form-label">Material</label>
-                            <input type="text" name="materialEdit" id="materialEdit" readonly class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="fornecedorEdit" class="col-form-label">Fornecedor</label>
-                            <input type="text" readonly name="fornecedorEdit" required class="form-control" id="fornecedorEdit">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="saida" class="col-form-label">Data de Saída</label>
-                            <input type="date" name="saida" id="saida" required class="form-control">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="qtd" required class="col-form-label">Qtd</label>
-                            <input type="number" name="qtd" id="qtd" class="form-control">
-                        </div>
-                    </div> 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="cliente" required class="col-form-label">Cliente</label>
-                            <input type="text" name="cliente" id="cliente" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="rota" required class="col-form-label">Rota</label>
-                            <input type="text" name="rota" id="rota" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="promotor" required class="col-form-label">Promotor</label>
-                            <input type="text" name="promotor" id="promotor" class="form-control">
-                        </div>
-                    </div>    
-            </div>
-            <div class="modal-footer">
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Atualizar</button>
-                    </div>
-                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </form> 
-            </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
-<!-- Finalizar modal editar -->
+<!-- Fim modal confirmação de recebimento -->
 
 <!-- modal lançar saida -->
 <div class="modal fade" id="modalSaida" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

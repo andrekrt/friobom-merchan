@@ -17,7 +17,7 @@ require("../conexao.php");
         
             if($_SESSION['idusuario']){
 
-                $arquivo = 'saidas.xls';
+                $arquivo = 'Solicitações Saidas.xls';
                 $html = '';
                 $html .= '<table border="1">';
                 $html .= '<tr>';
@@ -55,7 +55,7 @@ require("../conexao.php");
                     $html .= '<td>'.$cliente['0'] . '</td>';
                     $html .= '<td>'.$cliente['1'] . '</td>';
                     $html .= '<td>'. $dado['num_itens']. '</td>';
-                    $html .= '<td>'. "R$ ".number_format($dado['num_itens'],"2",",","."). '</td>';
+                    $html .= '<td>'. "R$ ".number_format($dado['valor'],"2",",","."). '</td>';
                     $html .= '<td>'.$dado['status_solic'] . '</td>';
                     $html .= '<td>'.date("d/m/Y H:i", strtotime($dado['data_resposta'])) . '</td>';
                     $html .= '<td>'.$dado['obs'] . '</td>';

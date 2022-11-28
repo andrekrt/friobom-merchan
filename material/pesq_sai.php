@@ -53,6 +53,18 @@ $empRecords = $stmt->fetchAll();
 $data = array();
 
 foreach($empRecords as $row){
+    $contrato=""; 
+    $recolher="";
+    $link = "";
+    if($row['tipo']=="Expositor" && $row['status_saida']=="Implementado"){
+        $contrato = '<a href="contrato-recolhimento.php?id='.$row['idsaidas'].' " data-id="'.$row['idsaidas'].'"  class="btn btn-secondary btn-sm deleteBtn" >Contrato de Recolhimento</a>';
+        $recolher = '  <a href="javascript:void();" data-id="'.$row['idsaidas'].'" id="recolher"  class="btn btn-success btn-sm editbtn" >Recolher</a>';
+    }
+
+    if($row['status_saida']=="Recolhido"){
+        $link =' <a href="contratos/recolhimentos/'.$row['idsaidas'].'"> Contrato </a>';
+    }
+
     $data[] = array(
             "idsaidas"=>$row['idsaidas'],
             "data_saida"=>date("d/m/Y", strtotime($row['data_saida'])),
@@ -62,8 +74,10 @@ foreach($empRecords as $row){
             "cliente"=>$row['cliente'],
             "rota"=>$row['rota'],
             "promotor"=>$row['promotor'],
-            "usuario"=>$row['nome']
-            // "acoes"=> '<a href="javascript:void();" data-id="'.$row['idsaidas'].'"  class="btn btn-info btn-sm editbtn" >Visulizar</a>  <a href="excluir-saida.php?id='.$row['idsaidas'].' " data-id="'.$row['idsaidas'].'"  class="btn btn-danger btn-sm deleteBtn" >Excluir</a>'
+            "situacao"=>$row['status_saida'],
+            "contrato"=>$link,
+            "usuario"=>$row['nome'],
+            "acoes"=>$contrato. $recolher
         );
 }
 
