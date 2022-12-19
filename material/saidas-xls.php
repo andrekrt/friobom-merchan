@@ -29,6 +29,7 @@ require("../conexao.php");
                 $html .= '<td class="text-center font-weight-bold"> Qtd </td>';
                 $html .= '<td class="text-center font-weight-bold"> Cliente </td>';
                 $html .= '<td class="text-center font-weight-bold"> Rota </td>';
+                $html .= '<td class="text-center font-weight-bold"> Preço Unit </td>';
                 $html .= '<td class="text-center font-weight-bold"> Lançado </td>';
                 $html .= '</tr>';
 
@@ -45,6 +46,7 @@ require("../conexao.php");
                     $html .= '<td>'. $dado['qtd']. '</td>';
                     $html .= '<td>'.($dado['cliente']) . '</td>';
                     $html .= '<td>'. $dado['rota']. '</td>';
+                    $html .= '<td>'. number_format($dado['custo_medio'],2,",",".") . '</td>';
                     $html .= '<td>'.$dado['nome'] . '</td>';
                     $html .= '</tr>';
 

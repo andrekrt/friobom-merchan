@@ -41,7 +41,8 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     // echo "$usuario<br>$material<br>$fornecedor<br>$qtd<br>$pedido";
 
     //consulta no winthor
-    $sqlwint = $dbora->prepare("SELECT PCCLIENT.CODCLI, PCCLIENT.CLIENTE, PCCLIENT.MUNICENT  FROM friobom.pcpedi LEFT JOIN friobom.pcclient ON pcpedi.codcli = pcclient.codcli LEFT JOIN friobom.PCPRODUT ON pcpedi.codprod = pcprodut.codprod where numped = :pedido and codfornec = :fornecedor");
+    $sqlwint = $dbora->prepare("SELECT PCCLIENT.CODCLI, PCCLIENT.CLIENTE, PCCLIENT.MUNICENT, PCCLIENT.ENDERENT, PCCLIENT.BAIRROENT  FROM friobom.pcpedi 
+    LEFT JOIN friobom.pcclient ON pcpedi.codcli = pcclient.codcli LEFT JOIN friobom.PCPRODUT ON pcpedi.codprod = pcprodut.codprod  where numped = :pedido and codfornec = :fornecedor");
     $sqlwint->bindValue(':pedido', $pedido);
     $sqlwint->bindValue(':fornecedor', $fornecedor);
     $sqlwint->execute();
@@ -59,13 +60,16 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     if($sqlwint && $qtdWint ){
         $dadosCli = $sqlwint->fetch();
 
-        $inserir = $db->prepare("INSERT INTO solicitacao_saida_material (data_solicitacao, material, qtd, pedido, cliente, rota, num_itens, valor, status_solic, solicitante) VALUE(:dataSolic, :material, :qtd, :pedido, :cliente, :rota, :itens, :valor, :situacao, :solicitante) ");
+        $inserir = $db->prepare("INSERT INTO solicitacao_saida_material (data_solicitacao, material, qtd, pedido, cliente, rota, cidade, endereco, bairro, num_itens, valor, status_solic, solicitante) VALUE(:dataSolic, :material, :qtd, :pedido, :cliente, :rota, :cidade, :endereco, :bairro, :itens, :valor, :situacao, :solicitante) ");
         $inserir->bindValue(':dataSolic', $data);
         $inserir->bindValue(':material', $material);
         $inserir->bindValue(':qtd', $qtd);
         $inserir->bindValue(':pedido', $pedido);
         $inserir->bindValue(':cliente', $dadosCli['CODCLI']." - ". utf8_encode($dadosCli['CLIENTE']));
         $inserir->bindValue(':rota', $dadosCli['MUNICENT']);
+        $inserir->bindValue(':cidade', $dadosCli['MUNICENT']);
+        $inserir->bindValue(':endereco', $dadosCli['ENDERENT']);
+        $inserir->bindValue(':bairro', $dadosCli['BAIRROENT']);
         $inserir->bindValue(':itens', $numItens);
         $inserir->bindValue(':valor', $valorTotal);
         $inserir->bindValue(':situacao', $situacao);
