@@ -48,5 +48,16 @@ function contaEstoque($material){
     $atualiza->execute();
 }
 
-contaEstoque(6);
+function consultaMaterial($idSaida){
+    require("../conexao.php");
+
+    $sql = $db->prepare("SELECT material, industria, qtd FROM saidas WHERE idsaidas=:idsaida");
+    $sql->bindValue(':idsaida', $idSaida);
+    $sql->execute();
+    $dados=$sql->fetch();
+
+    return $dados;
+}
+
+//print_r(consultaMaterial(12));
 ?>
