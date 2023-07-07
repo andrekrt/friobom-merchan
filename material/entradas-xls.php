@@ -25,7 +25,9 @@ require("../conexao.php");
                 $html .= '<td class="text-center font-weight-bold"> Data de Recebimento </td>';
                 $html .= '<td class="text-center font-weight-bold"> Material </td>';
                 $html .= '<td class="text-center font-weight-bold">Indústria</td>';
+                $html .= '<td class="text-center font-weight-bold">Valor Unit</td>';
                 $html .= '<td class="text-center font-weight-bold"> Qtd </td>';
+                $html .= '<td class="text-center font-weight-bold"> Valor Total </td>';
                 $html .= '<td class="text-center font-weight-bold"> Lançado </td>';
                 $html .= '</tr>';
 
@@ -38,7 +40,9 @@ require("../conexao.php");
                     $html .= '<td>'. date("d/m/Y", strtotime($dado['data_recebimento']))  . '</td>';
                     $html .= '<td>'. $dado['descricao'] . '</td>';
                     $html .= '<td>'. $dado['fantasia'] .'</td>';
+                    $html .= '<td>'. number_format($dado['valor_unit'],2,",",".") . '</td>';
                     $html .= '<td>'. $dado['qtd']. '</td>';
+                    $html .= '<td>'. number_format($dado['valor_total'],2,",",".") . '</td>';
                     $html .= '<td>'.$dado['nome'] . '</td>';
                     $html .= '</tr>';
 
