@@ -10,13 +10,17 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     $recebimento = filter_input(INPUT_POST, 'recebimento');
     $qtd = filter_input(INPUT_POST, 'qtd');
     $brinde = filter_input(INPUT_POST, 'brinde');
+    $nf = filter_input(INPUT_POST, 'nf');
+    $industria = filter_input(INPUT_POST, 'fornecedor');
 
     // echo "$idEntrada<br>$brinde<br>$recebimento<br>$qtd";
     
-    $sql = $db->prepare("UPDATE brindes_entrada SET data_recebimento = :recebimento, qtd = :qtd WHERE idbrindes_entrada = :id");
+    $sql = $db->prepare("UPDATE brindes_entrada SET data_recebimento = :recebimento, qtd = :qtd, num_nf=:nf, industria=:industria WHERE idbrindes_entrada = :id");
     $sql->bindValue(':recebimento', $recebimento);
     $sql->bindValue(':qtd', $qtd);
     $sql->bindValue(':id', $idEntrada);
+    $sql->bindValue(':nf', $nf);
+    $sql->bindValue(':industria', $industria);
     
     if($sql->execute()){
         contaEstoque($brinde);

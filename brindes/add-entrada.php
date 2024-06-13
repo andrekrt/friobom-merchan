@@ -10,14 +10,18 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_S
     $brinde = filter_input(INPUT_POST, 'brinde');
     $recebimento = filter_input(INPUT_POST, 'recebimento');
     $qtd = filter_input(INPUT_POST, 'qtd');
+    $nf = filter_input(INPUT_POST, 'nf');
+    $fornecedor = filter_input(INPUT_POST, 'fornecedor');
 
     // echo "$usuario<br>$brinde<br>$recebimento<br>$qtd";
     
-    $sql = $db->prepare("INSERT INTO brindes_entrada (data_recebimento, qtd, usuario, brinde) VALUES (:recebimento, :qtd, :usuario, :brinde)");
+    $sql = $db->prepare("INSERT INTO brindes_entrada (data_recebimento, qtd, usuario, brinde, num_nf, industria) VALUES (:recebimento, :qtd, :usuario, :brinde, :nf, :industria)");
     $sql->bindValue(':recebimento', $recebimento);
     $sql->bindValue(':brinde', $brinde);
     $sql->bindValue(':qtd', $qtd);
     $sql->bindValue(':usuario', $usuario);
+    $sql->bindValue(':nf', $nf);
+    $sql->bindValue(':industria', $fornecedor);
     
     if($sql->execute()){
         contaEstoque($brinde);

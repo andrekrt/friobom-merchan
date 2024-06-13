@@ -15,27 +15,28 @@ $searchArray = array();
 ## Search 
 $searchQuery = " ";
 if($searchValue != ''){
-	$searchQuery = " AND (descricao LIKE :descricao OR marca LIKE :marca ) ";
+	$searchQuery = " AND (descricao LIKE :descricao OR marca LIKE :marca OR fantasia LIKE :fantasia) ";
     $searchArray = array(
         'descricao'=>"%$searchValue%",
-        'marca'=>"%$searchValue%"
+        'marca'=>"%$searchValue%",
+        'fantasia'=>"%$searchValue%"
     );
 }
 
 ## Total number of records without filtering
-$stmt = $db->prepare("SELECT COUNT(*) AS allcount FROM brindes_entrada  LEFT JOIN brindes ON brindes_entrada.brinde = brindes.idbrindes LEFT JOIN usuarios ON brindes_entrada.usuario = usuarios.idusuarios");
+$stmt = $db->prepare("SELECT COUNT(*) AS allcount FROM brindes_entrada  LEFT JOIN brindes ON brindes_entrada.brinde = brindes.idbrindes LEFT JOIN usuarios ON brindes_entrada.usuario = usuarios.idusuarios LEFT JOIN industrias ON brindes_entrada.industria=industrias.idindustrias");
 $stmt->execute();
 $records = $stmt->fetch();
 $totalRecords = $records['allcount'];
 
 ## Total number of records with filtering
-$stmt = $db->prepare("SELECT COUNT(*) AS allcount FROM brindes_entrada  LEFT JOIN brindes ON brindes_entrada.brinde = brindes.idbrindes LEFT JOIN usuarios ON brindes_entrada.usuario = usuarios.idusuarios WHERE 1".$searchQuery);
+$stmt = $db->prepare("SELECT COUNT(*) AS allcount FROM brindes_entrada  LEFT JOIN brindes ON brindes_entrada.brinde = brindes.idbrindes LEFT JOIN usuarios ON brindes_entrada.usuario = usuarios.idusuarios LEFT JOIN industrias ON brindes_entrada.industria=industrias.idindustrias WHERE 1".$searchQuery);
 $stmt->execute($searchArray);
 $records = $stmt->fetch();
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$stmt = $db->prepare("SELECT * FROM brindes_entrada  LEFT JOIN brindes ON brindes_entrada.brinde = brindes.idbrindes LEFT JOIN usuarios ON brindes_entrada.usuario = usuarios.idusuarios WHERE 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT :limit,:offset");
+$stmt = $db->prepare("SELECT * FROM brindes_entrada  LEFT JOIN brindes ON brindes_entrada.brinde = brindes.idbrindes LEFT JOIN usuarios ON brindes_entrada.usuario = usuarios.idusuarios LEFT JOIN industrias ON brindes_entrada.industria=industrias.idindustrias WHERE 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT :limit,:offset");
 
 // Bind values
 foreach($searchArray as $key=>$search){
@@ -57,6 +58,8 @@ foreach($empRecords as $row){
             "tipo"=>$row['tipo'],
             "marca"=>$row['marca'],
             "qtd"=>$row['qtd'],
+            "num_nf"=>$row['num_nf'],
+            "fantasia"=>$row['fantasia'],
             "usuario"=>$row['nome'],
             "acoes"=> '<a href="javascript:void();" data-id="'.$row['idbrindes_entrada'].'"  class="btn btn-info btn-sm editbtn" >Editar</a>  <a href="excluir-entrada.php?id='.$row['idbrindes_entrada'].' " data-id="'.$row['idbrindes'].'"  class="btn btn-danger btn-sm deleteBtn" >Excluir</a>'
         );

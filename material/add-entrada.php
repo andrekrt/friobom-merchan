@@ -18,9 +18,10 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
     $apartamento = filter_input(INPUT_POST, 'apartamento');
     $valorUnit =str_replace(",",".",filter_input(INPUT_POST, 'valor')) ;
     $valorTotal = $valorUnit*$qtd;
+    $nf = filter_input(INPUT_POST, 'nf');
 
     
-    $sql = $db->prepare("INSERT INTO entradas (data_recebimento, material, industria,  qtd, valor_unit, valor_total, rua, predio, nivel, apartamento, usuario) VALUES (:recebimento, :material, :industria, :qtd, :valorUnit, :valorTotal, :rua, :predio, :nivel, :apartamento, :usuario)");
+    $sql = $db->prepare("INSERT INTO entradas (data_recebimento, material, industria,  qtd, valor_unit, valor_total, rua, predio, nivel, apartamento, usuario, num_nf) VALUES (:recebimento, :material, :industria, :qtd, :valorUnit, :valorTotal, :rua, :predio, :nivel, :apartamento, :usuario, :nf)");
     $sql->bindValue(':recebimento', $recebimento);
     $sql->bindValue(':material', $material);
     $sql->bindValue(':industria', $fornecedor);
@@ -32,6 +33,7 @@ if(isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false){
     $sql->bindValue(':nivel', $nivel);
     $sql->bindValue(':apartamento', $apartamento);
     $sql->bindValue(':usuario', $usuario);
+    $sql->bindValue(':nf', $nf);
     
     if($sql->execute()){
         contaEstoque($material);

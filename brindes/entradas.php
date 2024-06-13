@@ -68,6 +68,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <th scope="col" class="text-center text-nowrap">Tipo</th>
                                 <th scope="col" class="text-center text-nowrap">Marca</th>
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
+                                <th scope="col" class="text-center text-nowrap">NF</th>
+                                <th scope="col" class="text-center text-nowrap">Fornecedor</th>
                                 <th scope="col" class="text-center text-nowrap">Lançado por:</th>
                                 <th scope="col" class="text-center text-nowrap"> Ações </th> 
                             </tr>
@@ -101,6 +103,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     { data: 'tipo'},
                     { data: 'marca'},
                     {data: 'qtd'},
+                    {data: 'num_nf'},
+                    {data: 'fantasia'},
                     { data: 'usuario'},
                     { data: 'acoes'},
                 ],
@@ -130,6 +134,8 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     $('#qtd').val(json.qtd);
                     $('#recebimento').val(json.data_recebimento);
                     $('#marca').val(json.marca);
+                    $('#nf').val(json.num_nf);
+                    $('#fornecedor').val(json.industria);
                 }
             })
         });
@@ -174,6 +180,25 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                             <input type="number" name="qtd" id="qtd" class="form-control">
                         </div>
                     </div>   
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="nf" required class="col-form-label">Nº NF</label>
+                            <input type="number" name="nf" id="nf" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="fornecedor"  class="col-form-label">Fornecedor</label>
+                            <select name="fornecedor" required id="fornecedor" class="form-control">
+                                <option value=""></option>
+                                <?php
+                                $sqlForn = $db->query("SELECT * FROM industrias");
+                                $fornecedores = $sqlForn->fetchAll();
+                                foreach($fornecedores as $fornecedor):
+                                ?>
+                                <option value="<?=$fornecedor['idindustrias']?>"><?=$fornecedor['fantasia']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                     <div class="text-center">
@@ -220,10 +245,29 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                             <input type="date" name="recebimento" id="recebimento" required class="form-control">
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="qtd" required class="col-form-label">Qtd</label>
-                            <input type="number" name="qtd" id="qtd" class="form-control">
+                            <label for="qtd"  class="col-form-label">Qtd</label>
+                            <input type="number" required name="qtd" id="qtd" class="form-control">
                         </div>
                     </div>   
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="nf"  class="col-form-label">Nº NF</label>
+                            <input type="number" required name="nf" id="nf" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="fornecedor"  class="col-form-label">Fornecedor</label>
+                            <select name="fornecedor" required id="fornecedor" class="form-control">
+                                <option value=""></option>
+                                <?php
+                                $sqlForn = $db->query("SELECT * FROM industrias");
+                                $fornecedores = $sqlForn->fetchAll();
+                                foreach($fornecedores as $fornecedor):
+                                ?>
+                                <option value="<?=$fornecedor['idindustrias']?>"><?=$fornecedor['fantasia']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                     <div class="text-center">

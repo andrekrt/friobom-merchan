@@ -72,6 +72,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <th scope="col" class="text-center text-nowrap">Qtd</th>
                                 <th scope="col" class="text-center text-nowrap">Valor Unit</th>
                                 <th scope="col" class="text-center text-nowrap">Valor Total</th>
+                                <th scope="col" class="text-center text-nowrap">Nº NF</th>
                                 <th scope="col" class="text-center text-nowrap">Rua</th>
                                 <th scope="col" class="text-center text-nowrap">Prédio</th>
                                 <th scope="col" class="text-center text-nowrap">Nível</th>
@@ -111,6 +112,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     {data: 'qtd'},
                     {data: 'valor_unit'},
                     {data: 'valor_total'},
+                    {data: 'num_nf'},
                     {data: 'rua'},
                     {data: 'predio'},
                     {data: 'nivel'},
@@ -150,6 +152,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                     $('#predio').val(json.predio);
                     $('#nivel').val(json.nivel);
                     $('#apartamento').val(json.apartamento);
+                    $('#nf').val(json.num_nf);
                 }
             })
         });
@@ -182,7 +185,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="fornecedorEdit" class="col-form-label">Fornecedor</label>
                             <input type="text" readonly name="fornecedorEdit" id="fornecedorEdit" class="form-control">
                         </div>
@@ -190,13 +193,17 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                             <label for="recebimento" class="col-form-label">Data de Recebimento</label>
                             <input type="date" name="recebimento" id="recebimento" required class="form-control">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-1">
                             <label for="qtd" required class="col-form-label">Qtd</label>
                             <input type="number" name="qtd" id="qtd" class="form-control">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="valorEdit" required class="col-form-label">Valor Unit. (R$)</label>
                             <input type="text" name="valorEdit" id="valorEdit" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="nf" required class="col-form-label">Nº NF</label>
+                            <input type="number" name="nf" id="nf" class="form-control">
                         </div>
                     </div>   
                     <div class="form-row">
@@ -254,7 +261,7 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="fornecedor" class="col-form-label">Fornecedor</label>
                             <input type="text" readonly name="fornecedor" required class="form-control" id="fornecedor">
                         </div>
@@ -262,13 +269,17 @@ if (isset($_SESSION['idusuario']) && empty($_SESSION['idusuario'])==false && ($_
                             <label for="recebimento" class="col-form-label">Data de Recebimento</label>
                             <input type="date" name="recebimento" id="recebimento" required class="form-control">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-1">
                             <label for="qtd" required class="col-form-label">Qtd</label>
                             <input type="number" name="qtd" id="qtd" class="form-control">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="valor" required class="col-form-label">Valor Unit. (R$)</label>
                             <input type="text" name="valor" id="valor" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="nf" required class="col-form-label">Nº NF</label>
+                            <input type="number" name="nf" id="nf" class="form-control">
                         </div>
                     </div>  
                     <div class="form-row">
